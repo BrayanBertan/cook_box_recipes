@@ -2,6 +2,7 @@ import 'package:cook_box_recipes/stores/home_store.dart';
 import 'package:cook_box_recipes/views/home/widgets/app_bar_big_devices.dart';
 import 'package:cook_box_recipes/views/home/widgets/app_bar_small_devices.dart';
 import 'package:cook_box_recipes/views/home/widgets/custom_bottom_navigator.dart';
+import 'package:cook_box_recipes/views/home/widgets/favorite_recipe_list.dart';
 import 'package:cook_box_recipes/views/home/widgets/recipe_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -45,11 +46,11 @@ class _HomePageState extends State<HomePage> {
                 ? Observer(builder: (context) {
                     return PageView(
                       controller: pageController,
-                      children: [RecipeGrid(), Container()],
+                      children: [RecipeGrid(), MyRecipeList()],
                     );
                   })
                 : Row(
-                    children: [Expanded(child: RecipeGrid())],
+                    children: [Expanded(child: RecipeGrid()), MyRecipeList()],
                   )),
       ),
       bottomNavigationBar: CustomBottomNavigator(),

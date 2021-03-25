@@ -15,7 +15,7 @@ class RecipeRepository {
       endpoint += '&maxCalories=${filter.calories}';
     if (filter.fat.trim().isNotEmpty) endpoint += '&maxFat=${filter.fat}';
 
-    endpoint += '&offset=$offset&number=1';
+    endpoint += '&offset=$offset&number=10';
     try {
       final response = await Dio().get(endpoint);
 

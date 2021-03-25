@@ -9,6 +9,21 @@ part of 'recipe_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RecipeStore on _RecipeStore, Store {
+  final _$lastPageAtom = Atom(name: '_RecipeStore.lastPage');
+
+  @override
+  bool get lastPage {
+    _$lastPageAtom.reportRead();
+    return super.lastPage;
+  }
+
+  @override
+  set lastPage(bool value) {
+    _$lastPageAtom.reportWrite(value, super.lastPage, () {
+      super.lastPage = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_RecipeStore.loading');
 
   @override
@@ -135,17 +150,6 @@ mixin _$RecipeStore on _RecipeStore, Store {
   }
 
   @override
-  void setFilter(Recipe value) {
-    final _$actionInfo = _$_RecipeStoreActionController.startAction(
-        name: '_RecipeStore.setFilter');
-    try {
-      return super.setFilter(value);
-    } finally {
-      _$_RecipeStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setSearch(String value) {
     final _$actionInfo = _$_RecipeStoreActionController.startAction(
         name: '_RecipeStore.setSearch');
@@ -190,11 +194,11 @@ mixin _$RecipeStore on _RecipeStore, Store {
   }
 
   @override
-  void setOffset(int value) {
+  void setOffset() {
     final _$actionInfo = _$_RecipeStoreActionController.startAction(
         name: '_RecipeStore.setOffset');
     try {
-      return super.setOffset(value);
+      return super.setOffset();
     } finally {
       _$_RecipeStoreActionController.endAction(_$actionInfo);
     }
@@ -203,6 +207,7 @@ mixin _$RecipeStore on _RecipeStore, Store {
   @override
   String toString() {
     return '''
+lastPage: ${lastPage},
 loading: ${loading},
 filter: ${filter},
 search: ${search},

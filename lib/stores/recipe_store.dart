@@ -16,10 +16,22 @@ abstract class _RecipeStore with Store {
     maxCalories = '';
     maxFats = '';
     offset = 0;
-    getAllRecipes();
+    autorun((_) {
+      if (offset == 0) isLoading(true);
+      getAllRecipes();
+    });
   }
 
   RecipeRepository recipeRepository;
+
+  void resetPage() {
+    offset = 0;
+    recipeList.clear();
+    lastPage = false;
+  }
+
+  @observable
+  bool lastPage = false;
 
   @observable
   bool loading;
@@ -30,51 +42,61 @@ abstract class _RecipeStore with Store {
   @observable
   Recipe filter;
 
-  @action
-  void setFilter(Recipe value) => filter = value;
-
   @observable
   String search;
 
   @action
-  void setSearch(String value) => search = value;
+  void setSearch(String value) {
+    resetPage();
+    search = value;
+  }
 
   @observable
   String maxCarbs;
 
   @action
-  void setMaxCarbs(String value) => maxCarbs = value;
+  void setMaxCarbs(String value) {
+    resetPage();
+    maxCarbs = value;
+  }
 
   @observable
   String maxCalories;
 
   @action
-  void setMaxCalories(String value) => maxCalories = value;
+  void setMaxCalories(String value) {
+    resetPage();
+    maxCalories = value;
+  }
 
   @observable
   String maxFats;
 
   @action
-  void setMaxFats(String value) => maxFats = value;
+  void setMaxFats(String value) {
+    resetPage();
+    maxFats = value;
+  }
 
   @observable
   int offset;
 
   @action
-  void setOffset(int value) => offset = value;
+  void setOffset() => offset++;
 
   ObservableList<Recipe> recipeList = ObservableList<Recipe>();
 
   @action
   Future<void> getAllRecipes() async {
     try {
-      if (offset == 0) recipeList.clear();
       filter = Recipe(
           title: search, calories: maxCalories, carbs: maxCarbs, fat: maxFats);
       final response = await recipeRepository.getAllRecipes(filter, offset);
+      if (recipeList.length < 10) lastPage = true;
       recipeList.addAll(response);
     } catch (error) {
       print(error);
     }
+    isLoading(false);
   }
 }
