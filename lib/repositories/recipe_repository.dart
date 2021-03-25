@@ -11,8 +11,6 @@ class RecipeRepository {
 
     if (filter.title.trim().isNotEmpty) endpoint += '&query=${filter.title}';
     if (filter.carbs.trim().isNotEmpty) endpoint += '&maxCarbs=${filter.carbs}';
-    if (filter.protein.trim().isNotEmpty)
-      endpoint += '&maxProtein=${filter.protein}';
     if (filter.calories.trim().isNotEmpty)
       endpoint += '&maxCalories=${filter.calories}';
     if (filter.fat.trim().isNotEmpty) endpoint += '&maxFat=${filter.fat}';

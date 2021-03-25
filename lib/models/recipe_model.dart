@@ -6,7 +6,6 @@ class Recipe {
   String calories;
   String carbs;
   String fat;
-  String protein;
   String image;
   int servings;
   int readyInMinutes;
@@ -18,7 +17,6 @@ class Recipe {
       this.calories,
       this.carbs,
       this.fat,
-      this.protein,
       this.image,
       this.servings,
       this.readyInMinutes,
@@ -26,12 +24,11 @@ class Recipe {
 
   factory Recipe.fromJson(Map obj) {
     return Recipe(
-            id: obj['id'],
+            id: obj['id'] ?? 0,
             title: obj['title'],
             calories: obj['calories'] ?? '',
             carbs: obj['carbs'] ?? '',
             fat: obj['fat'] ?? '',
-            protein: obj['protein'] ?? '',
             image: obj['image'],
             servings: obj['servings'] ?? 0,
             readyInMinutes: obj['readyInMinutes'] ?? 0,
