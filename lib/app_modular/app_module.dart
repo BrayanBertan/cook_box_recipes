@@ -1,4 +1,5 @@
 import 'package:cook_box_recipes/repositories/recipe_repository.dart';
+import 'package:cook_box_recipes/stores/filter_store.dart';
 import 'package:cook_box_recipes/stores/home_store.dart';
 import 'package:cook_box_recipes/stores/recipe_store.dart';
 import 'package:cook_box_recipes/views/home/home_view.dart';
@@ -10,7 +11,8 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind((i) => RecipeRepository()),
     Bind.singleton((i) => HomeStore()),
-    Bind((i) => RecipeStore()),
+    Bind.singleton((i) => RecipeStore()),
+    Bind.singleton((i) => FilterStore()),
   ];
 
   @override

@@ -39,21 +39,6 @@ mixin _$RecipeStore on _RecipeStore, Store {
     });
   }
 
-  final _$filterAtom = Atom(name: '_RecipeStore.filter');
-
-  @override
-  Recipe get filter {
-    _$filterAtom.reportRead();
-    return super.filter;
-  }
-
-  @override
-  set filter(Recipe value) {
-    _$filterAtom.reportWrite(value, super.filter, () {
-      super.filter = value;
-    });
-  }
-
   final _$searchAtom = Atom(name: '_RecipeStore.search');
 
   @override
@@ -66,51 +51,6 @@ mixin _$RecipeStore on _RecipeStore, Store {
   set search(String value) {
     _$searchAtom.reportWrite(value, super.search, () {
       super.search = value;
-    });
-  }
-
-  final _$maxCarbsAtom = Atom(name: '_RecipeStore.maxCarbs');
-
-  @override
-  String get maxCarbs {
-    _$maxCarbsAtom.reportRead();
-    return super.maxCarbs;
-  }
-
-  @override
-  set maxCarbs(String value) {
-    _$maxCarbsAtom.reportWrite(value, super.maxCarbs, () {
-      super.maxCarbs = value;
-    });
-  }
-
-  final _$maxCaloriesAtom = Atom(name: '_RecipeStore.maxCalories');
-
-  @override
-  String get maxCalories {
-    _$maxCaloriesAtom.reportRead();
-    return super.maxCalories;
-  }
-
-  @override
-  set maxCalories(String value) {
-    _$maxCaloriesAtom.reportWrite(value, super.maxCalories, () {
-      super.maxCalories = value;
-    });
-  }
-
-  final _$maxFatsAtom = Atom(name: '_RecipeStore.maxFats');
-
-  @override
-  String get maxFats {
-    _$maxFatsAtom.reportRead();
-    return super.maxFats;
-  }
-
-  @override
-  set maxFats(String value) {
-    _$maxFatsAtom.reportWrite(value, super.maxFats, () {
-      super.maxFats = value;
     });
   }
 
@@ -129,11 +69,19 @@ mixin _$RecipeStore on _RecipeStore, Store {
     });
   }
 
-  final _$getAllRecipesAsyncAction = AsyncAction('_RecipeStore.getAllRecipes');
+  final _$filterAtom = Atom(name: '_RecipeStore.filter');
 
   @override
-  Future<void> getAllRecipes() {
-    return _$getAllRecipesAsyncAction.run(() => super.getAllRecipes());
+  FilterStore get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(FilterStore value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
   }
 
   final _$_RecipeStoreActionController = ActionController(name: '_RecipeStore');
@@ -161,39 +109,6 @@ mixin _$RecipeStore on _RecipeStore, Store {
   }
 
   @override
-  void setMaxCarbs(String value) {
-    final _$actionInfo = _$_RecipeStoreActionController.startAction(
-        name: '_RecipeStore.setMaxCarbs');
-    try {
-      return super.setMaxCarbs(value);
-    } finally {
-      _$_RecipeStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setMaxCalories(String value) {
-    final _$actionInfo = _$_RecipeStoreActionController.startAction(
-        name: '_RecipeStore.setMaxCalories');
-    try {
-      return super.setMaxCalories(value);
-    } finally {
-      _$_RecipeStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setMaxFats(String value) {
-    final _$actionInfo = _$_RecipeStoreActionController.startAction(
-        name: '_RecipeStore.setMaxFats');
-    try {
-      return super.setMaxFats(value);
-    } finally {
-      _$_RecipeStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setOffset() {
     final _$actionInfo = _$_RecipeStoreActionController.startAction(
         name: '_RecipeStore.setOffset');
@@ -205,16 +120,24 @@ mixin _$RecipeStore on _RecipeStore, Store {
   }
 
   @override
+  void setFilter(FilterStore value) {
+    final _$actionInfo = _$_RecipeStoreActionController.startAction(
+        name: '_RecipeStore.setFilter');
+    try {
+      return super.setFilter(value);
+    } finally {
+      _$_RecipeStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 lastPage: ${lastPage},
 loading: ${loading},
-filter: ${filter},
 search: ${search},
-maxCarbs: ${maxCarbs},
-maxCalories: ${maxCalories},
-maxFats: ${maxFats},
-offset: ${offset}
+offset: ${offset},
+filter: ${filter}
     ''';
   }
 }

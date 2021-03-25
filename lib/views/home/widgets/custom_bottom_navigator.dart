@@ -1,5 +1,6 @@
 import 'package:cook_box_recipes/stores/home_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -30,32 +31,36 @@ class CustomBottomNavigator extends StatelessWidget {
           ],
         ),
       ),
-      child: BottomNavigationBar(
-        onTap: (page) {
-          homeStore.setPage(page);
-        },
-        currentIndex: homeStore.page,
-        backgroundColor: Color.fromRGBO(203, 100, 100, 1),
-        selectedItemColor: Colors.white,
-        items: [
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/search.png',
-              width: 30,
-              height: 30,
-              fit: BoxFit.cover,
-            ),
-            label: 'Descubra',
-          ),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/images/my-recipe-book.png',
-                width: 30,
-                height: 30,
-                fit: BoxFit.cover,
+      child: Observer(
+        builder: (_) {
+          return BottomNavigationBar(
+            onTap: (page) {
+              homeStore.setPage(page);
+            },
+            currentIndex: homeStore.page,
+            backgroundColor: Color.fromRGBO(203, 100, 100, 1),
+            selectedItemColor: Colors.white,
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/images/search.png',
+                  width: 30,
+                  height: 30,
+                  fit: BoxFit.cover,
+                ),
+                label: 'Descubra',
               ),
-              label: 'Minhas receitas'),
-        ],
+              BottomNavigationBarItem(
+                  icon: Image.asset(
+                    'assets/images/my-recipe-book.png',
+                    width: 30,
+                    height: 30,
+                    fit: BoxFit.cover,
+                  ),
+                  label: 'Receitas favoritas'),
+            ],
+          );
+        },
       ),
     );
   }

@@ -1,19 +1,23 @@
 import 'package:cook_box_recipes/models/ingredient_model.dart';
 import 'package:cook_box_recipes/models/recipe_model.dart';
+import 'package:cook_box_recipes/stores/filter_store.dart';
 import 'package:dio/dio.dart';
 
 class RecipeRepository {
   final String _baseURL = "https://api.spoonacular.com";
   static const String API_KEY = "27f7b9425bf24169b69b3fe5492eb619";
 
-  Future<List<Recipe>> getAllRecipes(Recipe filter, int offset) async {
+  Future<List<Recipe>> getAllRecipes(
+      FilterStore filter, String search, int offset) async {
     String endpoint = '$_baseURL/recipes/complexSearch?apiKey=$API_KEY';
 
-    if (filter.title.trim().isNotEmpty) endpoint += '&query=${filter.title}';
-    if (filter.carbs.trim().isNotEmpty) endpoint += '&maxCarbs=${filter.carbs}';
-    if (filter.calories.trim().isNotEmpty)
-      endpoint += '&maxCalories=${filter.calories}';
-    if (filter.fat.trim().isNotEmpty) endpoint += '&maxFat=${filter.fat}';
+    if (search.trim().isNotEmpty) endpoint += '&query=${search}';
+    if (filter.maxCarbs.trim().isNotEmpty)
+      endpoint += '&maxCarbs=${filter.maxCarbs}';
+    if (filter.maxCalories.trim().isNotEmpty)
+      endpoint += '&maxCalories=${filter.maxCalories}';
+    if (filter.maxFats.trim().isNotEmpty)
+      endpoint += '&maxFat=${filter.maxFats}';
 
     endpoint += '&offset=$offset&number=10';
     try {

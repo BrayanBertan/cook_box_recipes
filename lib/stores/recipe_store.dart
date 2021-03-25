@@ -1,5 +1,6 @@
 import 'package:cook_box_recipes/models/recipe_model.dart';
 import 'package:cook_box_recipes/repositories/recipe_repository.dart';
+import 'package:cook_box_recipes/stores/filter_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -12,13 +13,18 @@ abstract class _RecipeStore with Store {
     recipeRepository = Modular.get<RecipeRepository>();
     loading = false;
     search = '';
-    maxCarbs = '';
-    maxCalories = '';
-    maxFats = '';
     offset = 0;
-    autorun((_) {
+    autorun((_) async {
       if (offset == 0) isLoading(true);
-      getAllRecipes();
+      try {
+        final response =
+            await recipeRepository.getAllRecipes(filter, search, offset);
+        if (recipeList.length < 10) lastPage = true;
+        recipeList.addAll(response);
+      } catch (error) {
+        print(error);
+      }
+      isLoading(false);
     });
   }
 
@@ -40,42 +46,12 @@ abstract class _RecipeStore with Store {
   void isLoading(bool value) => loading = value;
 
   @observable
-  Recipe filter;
-
-  @observable
   String search;
 
   @action
   void setSearch(String value) {
     resetPage();
     search = value;
-  }
-
-  @observable
-  String maxCarbs;
-
-  @action
-  void setMaxCarbs(String value) {
-    resetPage();
-    maxCarbs = value;
-  }
-
-  @observable
-  String maxCalories;
-
-  @action
-  void setMaxCalories(String value) {
-    resetPage();
-    maxCalories = value;
-  }
-
-  @observable
-  String maxFats;
-
-  @action
-  void setMaxFats(String value) {
-    resetPage();
-    maxFats = value;
   }
 
   @observable
@@ -86,17 +62,14 @@ abstract class _RecipeStore with Store {
 
   ObservableList<Recipe> recipeList = ObservableList<Recipe>();
 
+  @observable
+  FilterStore filter = FilterStore();
+
+  FilterStore get cloneFilter => filter.clone();
+
   @action
-  Future<void> getAllRecipes() async {
-    try {
-      filter = Recipe(
-          title: search, calories: maxCalories, carbs: maxCarbs, fat: maxFats);
-      final response = await recipeRepository.getAllRecipes(filter, offset);
-      if (recipeList.length < 10) lastPage = true;
-      recipeList.addAll(response);
-    } catch (error) {
-      print(error);
-    }
-    isLoading(false);
+  void setFilter(FilterStore value) {
+    resetPage();
+    filter = value;
   }
 }
