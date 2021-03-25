@@ -1,17 +1,17 @@
 class Ingredient {
-  int id;
   String name;
-  int amount;
-  String units;
+  int value;
+  String unit;
+  String image;
 
-  Ingredient({this.id, this.name, this.amount, this.units});
+  Ingredient({this.name, this.value, this.unit, this.image});
 
   factory Ingredient.fromJson(Map json) {
     return Ingredient(
-      id: json['id'],
       name: json['name'],
-      amount: json['measures']['metric']['amount'],
-      units: json['units'],
+      image: json['image'],
+      value: json['amount']['metric']['value'],
+      unit: json['amount']['metric']['unit'],
     );
   }
 }

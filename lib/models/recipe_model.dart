@@ -1,10 +1,9 @@
-import 'package:cook_box/models/ingredient_model.dart';
 import 'package:cook_box_recipes/models/ingredient_model.dart';
 
 class Recipe {
   int id;
   String title;
-  int calories;
+  String calories;
   String carbs;
   String fat;
   String protein;
