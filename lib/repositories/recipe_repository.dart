@@ -15,15 +15,13 @@ class RecipeRepository {
       endpoint += '&maxCalories=${filter.calories}';
     if (filter.fat.trim().isNotEmpty) endpoint += '&maxFat=${filter.fat}';
 
-    endpoint += '&offset=$offset&number=15';
-
+    endpoint += '&offset=$offset&number=1';
     try {
       final response = await Dio().get(endpoint);
-      return response.data
-          .map<Recipe>((recipe) => Recipe.fromJson(recipe))
-          .toList()
-            ..sort((Recipe a, Recipe b) =>
-                a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+
+      return response.data['results']
+          .map<Recipe>((receita) => Recipe.fromJson(receita))
+          .toList();
     } on DioError {
       return Future.error('Error to return recipes');
     }

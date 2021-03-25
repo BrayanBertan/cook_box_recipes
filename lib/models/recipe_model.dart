@@ -22,7 +22,7 @@ class Recipe {
       this.readyInMinutes,
       this.ingredients});
 
-  factory Recipe.fromJson(Map obj) {
+  factory Recipe.fromJson(Map<String, dynamic> obj) {
     return Recipe(
             id: obj['id'] ?? 0,
             title: obj['title'],

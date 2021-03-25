@@ -19,7 +19,7 @@ class CustomAppBarSmallDevices extends StatelessWidget {
                     ),
                     Expanded(child: CustomSearchInput()),
                     IconButton(
-                        iconSize: 40,
+                        iconSize: 30,
                         icon: Image.asset(
                           'assets/images/search.png',
                         ),

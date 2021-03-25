@@ -17,64 +17,29 @@ class RecipeItem extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(5),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AutoSizeText(
-                'COOKBOX',
+                recipe.title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 23,
                     color: Colors.black,
                     fontFamily: 'Billabong',
                     fontWeight: FontWeight.w500),
-                maxLines: 1,
+                maxLines: 2,
               ),
-              AspectRatio(
-                  aspectRatio: 1.5,
-                  child: Image.asset(
-                    'assets/images/cooking.png',
-                  )),
-              Expanded(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Tab(
-                    icon: Image.asset(
-                      'assets/images/timer.png',
+              Container(
+                clipBehavior: Clip.antiAlias,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                child: AspectRatio(
+                    aspectRatio: 1.5,
+                    child: Image.network(
+                      recipe.image,
                       fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  AutoSizeText(
-                    '50 minutos',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400),
-                    maxLines: 1,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Tab(
-                    icon: Image.asset(
-                      'assets/images/serving.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  AutoSizeText(
-                    '3',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400),
-                    maxLines: 1,
-                  ),
-                ],
-              ))
+                    )),
+              ),
             ],
           ),
         ),
