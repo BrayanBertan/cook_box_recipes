@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cook_box_recipes/models/recipe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class MyRecipeItem extends StatelessWidget {
+class FavoriteRecipeItem extends StatelessWidget {
+  Recipe recipe;
+  FavoriteRecipeItem({this.recipe});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -21,10 +24,10 @@ class MyRecipeItem extends StatelessWidget {
                 AspectRatio(
                     aspectRatio: 1.0,
                     child: Image.asset(
-                      'assets/images/cooking.png',
+                      recipe.image,
                     )),
                 AutoSizeText(
-                  'COOKBOX',
+                  recipe.title,
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.black,

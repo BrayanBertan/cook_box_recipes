@@ -13,7 +13,10 @@ class RecipeGrid extends StatelessWidget {
     final isMobile = ResponsiveWrapper.of(context).isMobile;
     return Observer(builder: (context) {
       return recipeStore.recipeList.length == 0 && !recipeStore.loading
-          ? EmptyListPage()
+          ? EmptyListPage(
+              title: 'Mude os filtros para achar novas receitas',
+              fontSize: 50,
+            )
           : GridView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.all(isMobile ? 10 : 25),

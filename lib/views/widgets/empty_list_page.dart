@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EmptyListPage extends StatelessWidget {
+  String title;
+  double fontSize;
+  EmptyListPage({this.title, this.fontSize});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,10 +19,12 @@ class EmptyListPage extends StatelessWidget {
             child: Image.asset('assets/images/empty-list.png'),
           ),
           AutoSizeText(
-            'OOPS! Mude os filtros para achar novas receitas',
+            'OOPS! $title',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 50, color: Colors.black, fontWeight: FontWeight.w500),
+                fontSize: fontSize,
+                color: Colors.black,
+                fontWeight: FontWeight.w500),
           ),
         ],
       ),

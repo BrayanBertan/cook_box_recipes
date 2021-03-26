@@ -46,11 +46,14 @@ class _HomePageState extends State<HomePage> {
                 ? Observer(builder: (context) {
                     return PageView(
                       controller: pageController,
-                      children: [RecipeGrid(), MyRecipeList()],
+                      children: [RecipeGrid(), FavoriteRecipeList()],
                     );
                   })
                 : Row(
-                    children: [Expanded(child: RecipeGrid()), MyRecipeList()],
+                    children: [
+                      Expanded(child: RecipeGrid()),
+                      FavoriteRecipeList()
+                    ],
                   )),
       ),
       bottomNavigationBar: CustomBottomNavigator(),

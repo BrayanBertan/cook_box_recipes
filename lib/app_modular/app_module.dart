@@ -1,4 +1,5 @@
 import 'package:cook_box_recipes/repositories/recipe_repository.dart';
+import 'package:cook_box_recipes/stores/favorites_store.dart';
 import 'package:cook_box_recipes/stores/filter_store.dart';
 import 'package:cook_box_recipes/stores/home_store.dart';
 import 'package:cook_box_recipes/stores/recipe_store.dart';
@@ -13,6 +14,7 @@ class AppModule extends Module {
     Bind.singleton((i) => HomeStore()),
     Bind.singleton((i) => RecipeStore()),
     Bind.singleton((i) => FilterStore()),
+    Bind.singleton((i) => FavoritesStore()),
   ];
 
   @override

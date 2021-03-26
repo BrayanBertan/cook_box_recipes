@@ -29,10 +29,18 @@ class Recipe {
             calories: obj['fat'] != null ? double.parse(obj['calories']) : 0.0,
             carbs: obj['fat'] != null ? double.parse(obj['carbs']) : 0.0,
             fat: obj['fat'] != null ? double.parse(obj['fat']) : 0.0,
-            image: obj['image'] ?? [],
+            image: obj['image'] ?? '',
             servings: obj['servings'] ?? 0,
             readyInMinutes: obj['readyInMinutes'] ?? 0,
             ingredients: obj['ingredients']) ??
         [];
+  }
+
+  Map<String, dynamic> tojson() {
+    return {
+      'id': this.id,
+      'title': this.title,
+      'image': this.image,
+    };
   }
 }
