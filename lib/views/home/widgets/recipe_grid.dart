@@ -12,7 +12,7 @@ class RecipeGrid extends StatelessWidget {
     RecipeStore recipeStore = Modular.get<RecipeStore>();
     final isMobile = ResponsiveWrapper.of(context).isMobile;
     return Observer(builder: (context) {
-      return recipeStore.recipeList.length == 0
+      return recipeStore.recipeList.length == 0 && !recipeStore.loading
           ? EmptyListPage()
           : GridView.builder(
               shrinkWrap: true,

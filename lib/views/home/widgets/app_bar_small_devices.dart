@@ -1,4 +1,5 @@
 import 'package:cook_box_recipes/stores/home_store.dart';
+import 'package:cook_box_recipes/stores/recipe_store.dart';
 import 'package:cook_box_recipes/views/home/widgets/filter_recipes.dart';
 import 'package:cook_box_recipes/views/home/widgets/search_input.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class CustomAppBarSmallDevices extends StatelessWidget {
   HomeStore homeStore = Modular.get<HomeStore>();
+  RecipeStore recipeStore = Modular.get<RecipeStore>();
+  final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
@@ -39,13 +42,17 @@ class CustomAppBarSmallDevices extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: CustomSearchInput()),
+                            Expanded(
+                                child: CustomSearchInput(
+                                    searchController: searchController)),
                             IconButton(
                                 iconSize: 30,
                                 icon: Image.asset(
                                   'assets/images/search.png',
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  recipeStore.setSearch(searchController.text);
+                                }),
                           ],
                         )),
                     Expanded(flex: 2, child: Container()),

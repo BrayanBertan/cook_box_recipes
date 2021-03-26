@@ -39,7 +39,7 @@ class FilterRecipes extends StatelessWidget {
                   onChanged: (double value) {
                     filterStore.setMaxCarbs(value);
                   },
-                  label: filterStore.maxCarbs.toStringAsFixed(0),
+                  label: filterStore.maxCarbs.toStringAsFixed(2),
                   divisions: 50,
                   activeColor: Color.fromRGBO(203, 100, 100, 1),
                 ),
@@ -54,7 +54,7 @@ class FilterRecipes extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(filterStore.maxCarbs.toStringAsFixed(0)),
+                    Text(filterStore.maxCarbs.toStringAsFixed(2)),
                   ],
                 ),
               );
@@ -75,7 +75,7 @@ class FilterRecipes extends StatelessWidget {
                   onChanged: (double value) {
                     filterStore.setMaxFats(value);
                   },
-                  label: filterStore.maxFats.toStringAsFixed(0),
+                  label: filterStore.maxFats.toStringAsFixed(2),
                   divisions: 50,
                   activeColor: Color.fromRGBO(203, 100, 100, 1),
                 ),
@@ -90,7 +90,7 @@ class FilterRecipes extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(filterStore.maxFats.toStringAsFixed(0)),
+                    Text(filterStore.maxFats.toStringAsFixed(2)),
                   ],
                 ),
               );
@@ -111,7 +111,7 @@ class FilterRecipes extends StatelessWidget {
                   onChanged: (double value) {
                     filterStore.setMaxCalories(value);
                   },
-                  label: filterStore.maxCalories.toStringAsFixed(0),
+                  label: filterStore.maxCalories.toStringAsFixed(2),
                   divisions: 50,
                   activeColor: Color.fromRGBO(203, 100, 100, 1),
                 ),
@@ -126,7 +126,7 @@ class FilterRecipes extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(filterStore.maxCalories.toStringAsFixed(0)),
+                    Text(filterStore.maxCalories.toStringAsFixed(2)),
                   ],
                 ),
               );
