@@ -84,6 +84,15 @@ mixin _$RecipeStore on _RecipeStore, Store {
     });
   }
 
+  final _$getSimilarRecipesAsyncAction =
+      AsyncAction('_RecipeStore.getSimilarRecipes');
+
+  @override
+  Future<void> getSimilarRecipes(String diet, String cuisine) {
+    return _$getSimilarRecipesAsyncAction
+        .run(() => super.getSimilarRecipes(diet, cuisine));
+  }
+
   final _$_RecipeStoreActionController = ActionController(name: '_RecipeStore');
 
   @override

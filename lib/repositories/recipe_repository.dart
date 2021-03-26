@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class RecipeRepository {
   final String _baseURL = "https://api.spoonacular.com";
-  static const String API_KEY = "945a8f9ea4fe4e5e80859da0d1d814f1";
+  static const String API_KEY = "2a77bc60a40b48cb9f273c2825118f9b";
 
   Future<List<Recipe>> getAllRecipes(
       FilterStore filter, String search, int offset) async {
@@ -28,14 +28,18 @@ class RecipeRepository {
     }
   }
 
-  Future<Map> getRecipeInfo(int id) async {
-    String endpoint =
-        '$_baseURL/recipes/$id/information?apiKey=$API_KEY&addRecipeNutrition=true';
+  Future<List<Recipe>> getSimilarRecipes(String diet, String cuisine) async {
+    String endpoint = '$_baseURL/recipes/random?apiKey=$API_KEY&number=3';
+    print(endpoint);
+    if (diet.trim().isNotEmpty) endpoint += '&diet=$diet';
+    if (cuisine.trim().isNotEmpty) endpoint += '&cuisine=$cuisine';
     try {
       final response = await Dio().get(endpoint);
-      return response.data;
+      return response.data['recipes'].map<Recipe>((receita) {
+        return Recipe.fromJson(receita);
+      }).toList();
     } on DioError {
-      return Future.error('Error to return recipe infos');
+      return Future.error('Error to return recipes');
     }
   }
 }

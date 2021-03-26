@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cook_box_recipes/models/recipe_model.dart';
+import 'package:cook_box_recipes/views/recipe/widgets/similar_recipes_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -9,10 +10,9 @@ class RecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -28,24 +28,43 @@ class RecipePage extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               )),
-              Expanded(flex: 2, child: Container())
+              Expanded(
+                child: Column(
+                  children: [
+                    AutoSizeText(
+                      obj.title,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500),
+                      maxLines: 1,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Html(
+                      data: obj.summary,
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
-          AutoSizeText(
-            obj.title,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-                fontSize: 30, color: Colors.black, fontWeight: FontWeight.w500),
-            maxLines: 1,
+          SizedBox(
+            height: 15,
           ),
-          Html(
-            data: obj.summary,
+          SizedBox(
+            height: 25,
           ),
           AutoSizeText(
             'Nutrients',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
             maxLines: 1,
+          ),
+          SizedBox(
+            height: 15,
           ),
           Card(
             elevation: 8,
@@ -76,11 +95,17 @@ class RecipePage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 25,
+          ),
           AutoSizeText(
             'Ingredientes',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
             maxLines: 1,
+          ),
+          SizedBox(
+            height: 15,
           ),
           Card(
             elevation: 8,
@@ -111,12 +136,18 @@ class RecipePage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 25,
+          ),
           AutoSizeText(
             'Modo de preparo',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
             maxLines: 1,
+          ),
+          SizedBox(
+            height: 15,
           ),
           Align(
             alignment: Alignment.center,
@@ -134,6 +165,17 @@ class RecipePage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 25,
+          ),
+          AutoSizeText(
+            'Receitas similars',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+            maxLines: 1,
+          ),
+          SimilarRecipesGrid(diet: obj.diet, cuisine: obj.cuisine)
         ],
       ),
     );

@@ -7,6 +7,8 @@ class Recipe {
   String image;
   int servings;
   int readyInMinutes;
+  String diet;
+  String cuisine;
   List<Nutrition> ingredients;
   List analyzedInstructions;
   List<Nutrition> nutrients;
@@ -20,24 +22,29 @@ class Recipe {
       this.ingredients,
       this.analyzedInstructions,
       this.nutrients,
-      this.summary});
+      this.summary,
+      this.diet,
+      this.cuisine});
 
   factory Recipe.fromJson(Map<String, dynamic> obj) {
     return Recipe(
       id: obj['id'] ?? 0,
       summary: obj['summary'] ?? '',
       title: obj['title'],
-      image: obj['image'] ?? '',
+      diet: obj['diet'] ?? '',
+      cuisine: obj['diet'] ?? '',
+      image: obj['image'] ??
+          'https://archive.org/download/no-photo-available/no-photo-available.png',
       servings: obj['servings'] ?? 0,
       readyInMinutes: obj['readyInMinutes'] ?? 0,
-      ingredients: obj['nutrition']['ingredients'] != null
+      ingredients: obj['nutrition'] != null
           ? List<Nutrition>.from(obj['nutrition']['ingredients']
               .map((ingredient) => Nutrition.fromJson(ingredient)))
           : [],
-      analyzedInstructions: obj['analyzedInstructions'][0]['steps'] != null
+      analyzedInstructions: obj['analyzedInstructions'] != null
           ? obj['analyzedInstructions'][0]['steps']
           : [],
-      nutrients: obj['nutrition']['ingredients'] != null
+      nutrients: obj['nutrition'] != null
           ? List<Nutrition>.from(obj['nutrition']['nutrients']
               .map((nutrient) => Nutrition.fromJson(nutrient)))
           : [],

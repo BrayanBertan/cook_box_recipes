@@ -9,7 +9,7 @@ class Nutrition {
     return Nutrition(
       name: json['name'] ?? '',
       amount: json['amount'] != null ? json['amount'] : 0.0,
-      unit: json['unit'] != null ? json['unit'] : 0.0,
+      unit: json['unit'] ?? '',
     );
   }
 }

@@ -72,4 +72,13 @@ abstract class _RecipeStore with Store {
     resetPage();
     filter = value;
   }
+
+  ObservableList<Recipe> similarRecipesList = ObservableList<Recipe>();
+
+  @action
+  Future<void> getSimilarRecipes(String diet, String cuisine) async {
+    similarRecipesList.clear();
+    final response = await recipeRepository.getSimilarRecipes(diet, cuisine);
+    similarRecipesList.addAll(response);
+  }
 }
