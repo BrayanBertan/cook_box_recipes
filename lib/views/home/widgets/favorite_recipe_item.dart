@@ -14,7 +14,7 @@ class FavoriteRecipeItem extends StatelessWidget {
         padding: EdgeInsets.all(5),
         child: GestureDetector(
           onTap: () {
-            Modular.to.pushNamed('/recipe');
+            Modular.to.navigate('/recipe');
           },
           child: Container(
             height: 50,

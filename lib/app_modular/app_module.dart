@@ -5,6 +5,7 @@ import 'package:cook_box_recipes/stores/home_store.dart';
 import 'package:cook_box_recipes/stores/recipe_store.dart';
 import 'package:cook_box_recipes/views/home/home_view.dart';
 import 'package:cook_box_recipes/views/recipe/recipe_view.dart';
+import 'package:cook_box_recipes/views/splash_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
@@ -19,8 +20,11 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, __) => RecipePage()),
+    ChildRoute('/', child: (_, __) => SplashScreen()),
     ChildRoute('/home', child: (_, __) => HomePage()),
-    ChildRoute('/recipe', child: (_, __) => RecipePage()),
+    ChildRoute(
+      '/recipe',
+      child: (_, args) => RecipePage(obj: args.data),
+    ),
   ];
 }

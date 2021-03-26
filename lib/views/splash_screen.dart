@@ -10,7 +10,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 1500))
+    Future.delayed(Duration(milliseconds: 500))
         .then((value) => Modular.to.pushReplacementNamed('/home'));
   }
 

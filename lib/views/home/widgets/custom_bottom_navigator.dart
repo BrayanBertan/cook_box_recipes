@@ -23,7 +23,7 @@ class CustomBottomNavigator extends StatelessWidget {
             Text(
               'COOKBOX',
               style: TextStyle(
-                  fontSize: 50,
+                  fontSize: 30,
                   color: Colors.white,
                   fontWeight: FontWeight.w500),
             ),

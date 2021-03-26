@@ -3,6 +3,7 @@ import 'package:cook_box_recipes/models/nutrition_model.dart';
 class Recipe {
   int id;
   String title;
+  String summary;
   String image;
   int servings;
   int readyInMinutes;
@@ -18,11 +19,13 @@ class Recipe {
       this.readyInMinutes,
       this.ingredients,
       this.analyzedInstructions,
-      this.nutrients});
+      this.nutrients,
+      this.summary});
 
   factory Recipe.fromJson(Map<String, dynamic> obj) {
     return Recipe(
       id: obj['id'] ?? 0,
+      summary: obj['summary'] ?? '',
       title: obj['title'],
       image: obj['image'] ?? '',
       servings: obj['servings'] ?? 0,
@@ -32,7 +35,7 @@ class Recipe {
               .map((ingredient) => Nutrition.fromJson(ingredient)))
           : [],
       analyzedInstructions: obj['analyzedInstructions'][0]['steps'] != null
-          ? obj['analyzedInstructions'][0]['step']
+          ? obj['analyzedInstructions'][0]['steps']
           : [],
       nutrients: obj['nutrition']['ingredients'] != null
           ? List<Nutrition>.from(obj['nutrition']['nutrients']

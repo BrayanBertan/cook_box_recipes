@@ -1,31 +1,48 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cook_box_recipes/models/recipe_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class RecipePage extends StatelessWidget {
-  final int id;
-  RecipePage({this.id});
+  final Recipe obj;
+  RecipePage({this.obj});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.all(15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                  child: Container(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Image.network(
+                  obj.image,
+                  fit: BoxFit.cover,
+                ),
+              )),
+              Expanded(flex: 2, child: Container())
+            ],
+          ),
           AutoSizeText(
-            'COOKBOX',
+            obj.title,
             textAlign: TextAlign.left,
             style: TextStyle(
                 fontSize: 30, color: Colors.black, fontWeight: FontWeight.w500),
             maxLines: 1,
           ),
-          Row(
-            children: [
-              Expanded(child: Image.asset('assets/images/cooking.png')),
-              Expanded(child: Container())
-            ],
+          Html(
+            data: obj.summary,
           ),
           AutoSizeText(
-            'Informações',
+            'Nutrients',
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
             maxLines: 1,
@@ -36,37 +53,26 @@ class RecipePage extends StatelessWidget {
               width: double.infinity,
               child: Wrap(
                 alignment: WrapAlignment.center,
-                spacing: 5,
-                runSpacing: 2,
-                children: [
-                  Text(
-                    'Calorias: 50',
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300),
-                  ),
-                  Text('Gordura: 30',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300)),
-                  Text('Carboidratos: 9',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300)),
-                  Text('Tempo de preparo: 50',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300)),
-                  Text('Serve: 2',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300)),
-                ],
+                spacing: 8,
+                runSpacing: 3,
+                children: obj.nutrients
+                    .map((nutrient) => Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 5,
+                              height: 5,
+                              decoration: BoxDecoration(
+                                  color: Colors.black, shape: BoxShape.circle),
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                                '${nutrient.name} ${nutrient.amount} ${nutrient.unit}'),
+                          ],
+                        ))
+                    .toList(),
               ),
             ),
           ),
@@ -78,20 +84,54 @@ class RecipePage extends StatelessWidget {
           ),
           Card(
             elevation: 8,
-            child: Row(
-              children: [Text('aaaaaa')],
+            child: Container(
+              width: double.infinity,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 8,
+                runSpacing: 3,
+                children: obj.ingredients
+                    .map((ingredients) => Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 5,
+                              height: 5,
+                              decoration: BoxDecoration(
+                                  color: Colors.black, shape: BoxShape.circle),
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                                '${ingredients.name} ${ingredients.amount} ${ingredients.unit}'),
+                          ],
+                        ))
+                    .toList(),
+              ),
             ),
           ),
           AutoSizeText(
             'Modo de preparo',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
             maxLines: 1,
           ),
-          Card(
-            elevation: 8,
-            child: Row(
-              children: [Text('aaaaaa')],
+          Align(
+            alignment: Alignment.center,
+            child: Card(
+              elevation: 8,
+              child: Container(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: obj.analyzedInstructions
+                      .map((instruction) => Text(
+                          '${instruction['number']} - ${instruction['step']}'))
+                      .toList(),
+                ),
+              ),
             ),
           ),
         ],

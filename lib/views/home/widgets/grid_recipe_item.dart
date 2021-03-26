@@ -13,15 +13,22 @@ class RecipeItem extends StatelessWidget {
         ResponsiveWrapper.of(context).isTablet);
     return GestureDetector(
       onTap: () {
-        Modular.to.pushNamed('/recipe');
+        Modular.to.navigate('/recipe', arguments: recipe);
       },
       child: Card(
         elevation: 8,
         child: Padding(
-          padding: EdgeInsets.only(top: 15),
+          padding: EdgeInsets.zero,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Expanded(
+                flex: 4,
+                child: Image.network(
+                  recipe.image,
+                  fit: BoxFit.cover,
+                ),
+              ),
               AutoSizeText(
                 recipe.title,
                 textAlign: TextAlign.center,
@@ -29,16 +36,56 @@ class RecipeItem extends StatelessWidget {
                     fontSize: 18,
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
-                maxLines: 2,
+                maxLines: 1,
               ),
-              Container(
-                child: AspectRatio(
-                    aspectRatio: isSmallDevice ? 1.6 : 1.4,
-                    child: Image.network(
-                      recipe.image,
-                      fit: BoxFit.cover,
-                    )),
-              ),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        minLeadingWidth: 10,
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          radius: 12,
+                          backgroundImage: NetworkImage(
+                            'assets/images/timer.png',
+                          ),
+                        ),
+                        title: AutoSizeText(
+                          '${recipe.readyInMinutes} minutos',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 8,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        minLeadingWidth: 10,
+                        leading: CircleAvatar(
+                          radius: 12,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: NetworkImage(
+                            'assets/images/serving.png',
+                          ),
+                        ),
+                        title: AutoSizeText(
+                          '${recipe.servings} pessoas',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 8,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

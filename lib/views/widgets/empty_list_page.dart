@@ -12,18 +12,18 @@ class EmptyListPage extends StatelessWidget {
       padding: EdgeInsets.all(25),
       alignment: Alignment.bottomCenter,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           AspectRatio(
             aspectRatio: 2,
             child: Image.asset('assets/images/empty-list.png'),
           ),
+          SizedBox(height: 5,),
           AutoSizeText(
             'OOPS! $title',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: fontSize,
-                color: Colors.black,
+                color: fontSize == 50 ? Colors.black : Colors.white,
                 fontWeight: FontWeight.w500),
           ),
         ],

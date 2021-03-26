@@ -21,7 +21,6 @@ abstract class _RecipeStore with Store {
             await recipeRepository.getAllRecipes(filter, search, offset);
         if (recipeList.length < 10) lastPage = true;
         recipeList.addAll(response);
-        print('teste ${recipeList}');
       } catch (error) {
         print(error);
       }
