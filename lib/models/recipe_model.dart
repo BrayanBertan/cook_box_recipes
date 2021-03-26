@@ -1,39 +1,44 @@
-import 'package:cook_box_recipes/models/ingredient_model.dart';
+import 'package:cook_box_recipes/models/nutrition_model.dart';
 
 class Recipe {
   int id;
   String title;
-  double calories;
-  double carbs;
-  double fat;
   String image;
   int servings;
   int readyInMinutes;
-  List<Ingredient> ingredients;
+  List<Nutrition> ingredients;
+  List analyzedInstructions;
+  List<Nutrition> nutrients;
 
   Recipe(
       {this.id,
       this.title,
-      this.calories,
-      this.carbs,
-      this.fat,
       this.image,
       this.servings,
       this.readyInMinutes,
-      this.ingredients});
+      this.ingredients,
+      this.analyzedInstructions,
+      this.nutrients});
 
   factory Recipe.fromJson(Map<String, dynamic> obj) {
     return Recipe(
-            id: obj['id'] ?? 0,
-            title: obj['title'],
-            calories: obj['fat'] != null ? double.parse(obj['calories']) : 0.0,
-            carbs: obj['fat'] != null ? double.parse(obj['carbs']) : 0.0,
-            fat: obj['fat'] != null ? double.parse(obj['fat']) : 0.0,
-            image: obj['image'] ?? '',
-            servings: obj['servings'] ?? 0,
-            readyInMinutes: obj['readyInMinutes'] ?? 0,
-            ingredients: obj['ingredients']) ??
-        [];
+      id: obj['id'] ?? 0,
+      title: obj['title'],
+      image: obj['image'] ?? '',
+      servings: obj['servings'] ?? 0,
+      readyInMinutes: obj['readyInMinutes'] ?? 0,
+      ingredients: obj['nutrition']['ingredients'] != null
+          ? List<Nutrition>.from(obj['nutrition']['ingredients']
+              .map((ingredient) => Nutrition.fromJson(ingredient)))
+          : [],
+      analyzedInstructions: obj['analyzedInstructions'][0]['steps'] != null
+          ? obj['analyzedInstructions'][0]['step']
+          : [],
+      nutrients: obj['nutrition']['ingredients'] != null
+          ? List<Nutrition>.from(obj['nutrition']['nutrients']
+              .map((nutrient) => Nutrition.fromJson(nutrient)))
+          : [],
+    );
   }
 
   Map<String, dynamic> tojson() {
