@@ -8,30 +8,30 @@ class FilterStore = _FilterStore with _$FilterStore;
 
 abstract class _FilterStore with Store {
   _FilterStore(
-      {this.maxCarbs = '50', this.maxFats = '50', this.maxCalories = '50'});
+      {this.maxCarbs = 50.0, this.maxFats = 50.0, this.maxCalories = 50.0});
 
   @observable
-  String maxCarbs;
+  double maxCarbs;
 
   @action
   void setMaxCarbs(double value) {
-    maxCarbs = value.toStringAsFixed(0);
+    maxCarbs = value;
   }
 
   @observable
-  String maxCalories;
+  double maxCalories;
 
   @action
   void setMaxCalories(double value) {
-    maxCalories = value.toStringAsFixed(0);
+    maxCalories = value;
   }
 
   @observable
-  String maxFats;
+  double maxFats;
 
   @action
   void setMaxFats(double value) {
-    maxFats = value.toStringAsFixed(0);
+    maxFats = value;
   }
 
   void setFilter() {

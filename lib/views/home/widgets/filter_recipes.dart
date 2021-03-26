@@ -33,15 +33,13 @@ class FilterRecipes extends StatelessWidget {
                       fontWeight: FontWeight.w400),
                 ),
                 title: Slider(
-                  value: filterStore.maxCarbs.trim().isNotEmpty
-                      ? double.parse(filterStore.maxCarbs)
-                      : 0,
+                  value: filterStore.maxCarbs,
                   min: 0,
                   max: 300,
                   onChanged: (double value) {
                     filterStore.setMaxCarbs(value);
                   },
-                  label: filterStore.maxCarbs,
+                  label: filterStore.maxCarbs.toStringAsFixed(0),
                   divisions: 50,
                   activeColor: Color.fromRGBO(203, 100, 100, 1),
                 ),
@@ -56,7 +54,7 @@ class FilterRecipes extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(filterStore.maxCarbs)
+                    Text(filterStore.maxCarbs.toStringAsFixed(0)),
                   ],
                 ),
               );
@@ -64,22 +62,20 @@ class FilterRecipes extends StatelessWidget {
             Observer(builder: (_) {
               return ListTile(
                 leading: Text(
-                  'Proteinas',
+                  'Gorduras',
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.black,
                       fontWeight: FontWeight.w400),
                 ),
                 title: Slider(
-                  value: filterStore.maxCarbs.trim().isNotEmpty
-                      ? double.parse(filterStore.maxCarbs)
-                      : 0,
+                  value: filterStore.maxFats,
                   min: 0,
                   max: 300,
                   onChanged: (double value) {
-                    filterStore.setMaxCarbs(value);
+                    filterStore.setMaxFats(value);
                   },
-                  label: filterStore.maxCarbs,
+                  label: filterStore.maxFats.toStringAsFixed(0),
                   divisions: 50,
                   activeColor: Color.fromRGBO(203, 100, 100, 1),
                 ),
@@ -90,11 +86,11 @@ class FilterRecipes extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       child: Image.asset(
-                        'assets/images/protein.png',
+                        'assets/images/fat.png',
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(filterStore.maxCarbs)
+                    Text(filterStore.maxFats.toStringAsFixed(0)),
                   ],
                 ),
               );
@@ -109,15 +105,13 @@ class FilterRecipes extends StatelessWidget {
                       fontWeight: FontWeight.w400),
                 ),
                 title: Slider(
-                  value: filterStore.maxCarbs.trim().isNotEmpty
-                      ? double.parse(filterStore.maxCarbs)
-                      : 0,
+                  value: filterStore.maxCalories,
                   min: 0,
                   max: 300,
                   onChanged: (double value) {
-                    filterStore.setMaxCarbs(value);
+                    filterStore.setMaxCalories(value);
                   },
-                  label: filterStore.maxCarbs,
+                  label: filterStore.maxCalories.toStringAsFixed(0),
                   divisions: 50,
                   activeColor: Color.fromRGBO(203, 100, 100, 1),
                 ),
@@ -132,7 +126,7 @@ class FilterRecipes extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(filterStore.maxCarbs)
+                    Text(filterStore.maxCalories.toStringAsFixed(0)),
                   ],
                 ),
               );
@@ -145,6 +139,7 @@ class FilterRecipes extends StatelessWidget {
                   primary: Color.fromRGBO(203, 100, 100, 1),
                 ),
                 onPressed: () {
+                  Modular.to.pop();
                   filterStore.setFilter();
                 },
                 child: Text('Filtrar')),

@@ -29,12 +29,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isSmallDivice = (ResponsiveWrapper.of(context).isMobile ||
+    final isSmallDevice = (ResponsiveWrapper.of(context).isMobile ||
         ResponsiveWrapper.of(context).isTablet);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, 56),
-        child: isSmallDivice
+        child: isSmallDevice
             ? CustomAppBarSmallDevices()
             : CustomAppBarBigDevices(),
       ),
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
             constraints: BoxConstraints(maxWidth: 1200),
-            child: isSmallDivice
+            child: isSmallDevice
                 ? Observer(builder: (context) {
                     return PageView(
                       controller: pageController,

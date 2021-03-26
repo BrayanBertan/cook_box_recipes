@@ -12,14 +12,13 @@ class RecipeRepository {
     String endpoint = '$_baseURL/recipes/complexSearch?apiKey=$API_KEY';
 
     if (search.trim().isNotEmpty) endpoint += '&query=${search}';
-    if (filter.maxCarbs.trim().isNotEmpty)
-      endpoint += '&maxCarbs=${filter.maxCarbs}';
-    if (filter.maxCalories.trim().isNotEmpty)
+    if (filter.maxCarbs > 0) endpoint += '&maxCarbs=${filter.maxCarbs}';
+    if (filter.maxCalories > 0)
       endpoint += '&maxCalories=${filter.maxCalories}';
-    if (filter.maxFats.trim().isNotEmpty)
-      endpoint += '&maxFat=${filter.maxFats}';
+    if (filter.maxFats > 0) endpoint += '&maxFat=${filter.maxFats}';
 
     endpoint += '&offset=$offset&number=1';
+    return [];
     try {
       final response = await Dio().get(endpoint);
 

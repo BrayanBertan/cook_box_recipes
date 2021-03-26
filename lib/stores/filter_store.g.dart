@@ -12,13 +12,13 @@ mixin _$FilterStore on _FilterStore, Store {
   final _$maxCarbsAtom = Atom(name: '_FilterStore.maxCarbs');
 
   @override
-  String get maxCarbs {
+  double get maxCarbs {
     _$maxCarbsAtom.reportRead();
     return super.maxCarbs;
   }
 
   @override
-  set maxCarbs(String value) {
+  set maxCarbs(double value) {
     _$maxCarbsAtom.reportWrite(value, super.maxCarbs, () {
       super.maxCarbs = value;
     });
@@ -27,13 +27,13 @@ mixin _$FilterStore on _FilterStore, Store {
   final _$maxCaloriesAtom = Atom(name: '_FilterStore.maxCalories');
 
   @override
-  String get maxCalories {
+  double get maxCalories {
     _$maxCaloriesAtom.reportRead();
     return super.maxCalories;
   }
 
   @override
-  set maxCalories(String value) {
+  set maxCalories(double value) {
     _$maxCaloriesAtom.reportWrite(value, super.maxCalories, () {
       super.maxCalories = value;
     });
@@ -42,13 +42,13 @@ mixin _$FilterStore on _FilterStore, Store {
   final _$maxFatsAtom = Atom(name: '_FilterStore.maxFats');
 
   @override
-  String get maxFats {
+  double get maxFats {
     _$maxFatsAtom.reportRead();
     return super.maxFats;
   }
 
   @override
-  set maxFats(String value) {
+  set maxFats(double value) {
     _$maxFatsAtom.reportWrite(value, super.maxFats, () {
       super.maxFats = value;
     });
