@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cook_box_recipes/stores/filter_store.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -136,35 +135,6 @@ class FilterRecipes extends StatelessWidget {
                     Text(filterStore.maxCarbs)
                   ],
                 ),
-              );
-            }),
-            Observer(builder: (context) {
-              return Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
-                          labelText: 'Número de pessoas'),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Expanded(
-                      child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      labelText: 'Número de pessoas',
-                    ),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                  )),
-                ],
               );
             }),
             SizedBox(

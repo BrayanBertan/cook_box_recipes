@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color.fromRGBO(203, 100, 100, 1),
+        fontFamily: 'happymonkey',
       ),
       builder: (context, widget) => ResponsiveWrapper.builder(
           ClampingScrollWrapper.builder(context, widget),

@@ -15,7 +15,7 @@ class RecipeItem extends StatelessWidget {
       child: Card(
         elevation: 8,
         child: Padding(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.zero,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -23,16 +23,15 @@ class RecipeItem extends StatelessWidget {
                 recipe.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 23,
+                    fontSize: 30,
                     color: Colors.black,
-                    fontFamily: 'Billabong',
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.bold),
                 maxLines: 2,
               ),
               Container(
-                clipBehavior: Clip.antiAlias,
+                /* clipBehavior: Clip.antiAlias,
                 decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                    BoxDecoration(borderRadius: BorderRadius.circular(8)),*/
                 child: AspectRatio(
                     aspectRatio: 1.5,
                     child: Image.network(

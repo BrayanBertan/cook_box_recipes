@@ -25,7 +25,6 @@ class CustomBottomNavigator extends StatelessWidget {
               style: TextStyle(
                   fontSize: 50,
                   color: Colors.white,
-                  fontFamily: 'Billabong',
                   fontWeight: FontWeight.w500),
             ),
           ],

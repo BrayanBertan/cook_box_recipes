@@ -26,7 +26,6 @@ class CustomAppBarSmallDevices extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.white,
-                          fontFamily: 'Billabong',
                           fontWeight: FontWeight.w500),
                     ),
                   ],

@@ -52,9 +52,9 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: Billabong
+    - family: happymonkey
       fonts:
-        - asset: assets/fonts/Billabong.ttf
+        - asset: assets/fonts/HappyMonkey-Regular.ttf
   assets:
     - assets/images/
 

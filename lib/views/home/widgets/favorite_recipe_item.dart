@@ -28,7 +28,6 @@ class MyRecipeItem extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.black,
-                      fontFamily: 'Billabong',
                       fontWeight: FontWeight.w500),
                   maxLines: 1,
                 ),

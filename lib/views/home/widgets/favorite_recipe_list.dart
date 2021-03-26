@@ -18,10 +18,7 @@ class MyRecipeList extends StatelessWidget {
           Text(
             'Minhas receitas',
             style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontFamily: 'Billabong',
-                fontWeight: FontWeight.w500),
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w500),
             maxLines: 1,
           ),
           Expanded(
