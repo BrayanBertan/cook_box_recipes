@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class RecipeRepository {
   final String _baseURL = "https://api.spoonacular.com";
-  static const String API_KEY = "2a77bc60a40b48cb9f273c2825118f9b";
+  static const String API_KEY = "ef4568fdba7e4de5aa90bdb7ecb9e934";
 
   Future<List<Recipe>> getAllRecipes(
       FilterStore filter, String search, int offset) async {
@@ -17,7 +17,7 @@ class RecipeRepository {
     if (filter.maxFats > 0) endpoint += '&maxFat=${filter.maxFats}';
 
     endpoint += '&addRecipeNutrition=true&offset=$offset&number=1';
-
+    print(endpoint);
     try {
       final response = await Dio().get(endpoint);
       return response.data['results'].map<Recipe>((receita) {

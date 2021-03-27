@@ -1,63 +1,36 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cook_box_recipes/models/recipe_model.dart';
+import 'package:cook_box_recipes/views/recipe/widgets/recipe_view_top_big_devices.dart';
+import 'package:cook_box_recipes/views/recipe/widgets/recipe_view_top_small_devices.dart';
 import 'package:cook_box_recipes/views/recipe/widgets/similar_recipes_grid.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
-class RecipePage extends StatelessWidget {
+class RecipePage extends StatefulWidget {
   final Recipe obj;
   RecipePage({this.obj});
+
+  @override
+  _RecipePageState createState() => _RecipePageState();
+}
+
+class _RecipePageState extends State<RecipePage> {
   @override
   Widget build(BuildContext context) {
+    final isSmallDevice = (ResponsiveWrapper.of(context).isMobile ||
+        ResponsiveWrapper.of(context).isTablet);
     return SingleChildScrollView(
       padding: EdgeInsets.all(25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                  child: Container(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+          isSmallDevice
+              ? RecipeViewTopSmallDevices(
+                  recipe: widget.obj,
+                )
+              : RecipeViewTopBigDevices(
+                  recipe: widget.obj,
                 ),
-                child: Image.network(
-                  obj.image,
-                  fit: BoxFit.cover,
-                ),
-              )),
-              Expanded(
-                child: Column(
-                  children: [
-                    AutoSizeText(
-                      obj.title,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.none),
-                      maxLines: 1,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Html(
-                      data: obj.summary,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          SizedBox(
-            height: 25,
-          ),
           AutoSizeText(
             'Nutrients',
             style: TextStyle(
@@ -78,7 +51,7 @@ class RecipePage extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 spacing: 8,
                 runSpacing: 3,
-                children: obj.nutrients
+                children: widget.obj.nutrients
                     .map((nutrient) => Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -122,7 +95,7 @@ class RecipePage extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 spacing: 8,
                 runSpacing: 3,
-                children: obj.ingredients
+                children: widget.obj.ingredients
                     .map((ingredients) => Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -167,7 +140,7 @@ class RecipePage extends StatelessWidget {
                 padding: EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: obj.analyzedInstructions
+                  children: widget.obj.analyzedInstructions
                       .map((instruction) => Text(
                           '${instruction['number']} - ${instruction['step']}'))
                       .toList(),
@@ -188,7 +161,7 @@ class RecipePage extends StatelessWidget {
                 fontWeight: FontWeight.w400),
             maxLines: 1,
           ),
-          SimilarRecipesGrid(diet: obj.diet, cuisine: obj.cuisine)
+          SimilarRecipesGrid(diet: widget.obj.diet, cuisine: widget.obj.cuisine)
         ],
       ),
     );
