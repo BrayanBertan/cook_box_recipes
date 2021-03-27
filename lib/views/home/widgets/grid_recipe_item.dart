@@ -18,7 +18,7 @@ class RecipeItem extends StatelessWidget {
       child: Card(
         elevation: 8,
         child: Padding(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(bottom: 5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -52,7 +52,9 @@ class RecipeItem extends StatelessWidget {
                           ),
                         ),
                         title: AutoSizeText(
-                          '${recipe.readyInMinutes} minutos',
+                          isSmallDevice
+                              ? '${recipe.readyInMinutes} min'
+                              : '${recipe.readyInMinutes} minutos',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 8,
@@ -64,7 +66,7 @@ class RecipeItem extends StatelessWidget {
                     ),
                     Expanded(
                       child: ListTile(
-                        minLeadingWidth: 10,
+                        minLeadingWidth: 8,
                         leading: CircleAvatar(
                           radius: 12,
                           backgroundColor: Colors.transparent,
@@ -73,7 +75,9 @@ class RecipeItem extends StatelessWidget {
                           ),
                         ),
                         title: AutoSizeText(
-                          '${recipe.servings} pessoas',
+                          isSmallDevice
+                              ? '${recipe.servings}'
+                              : '${recipe.servings} pessoas',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 8,
