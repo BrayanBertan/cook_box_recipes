@@ -1,9 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cook_box_recipes/models/recipe_model.dart';
+import 'package:cook_box_recipes/stores/favorites_store.dart';
 import 'package:cook_box_recipes/views/recipe/widgets/recipe_view_top_big_devices.dart';
 import 'package:cook_box_recipes/views/recipe/widgets/recipe_view_top_small_devices.dart';
 import 'package:cook_box_recipes/views/recipe/widgets/similar_recipes_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class RecipePage extends StatefulWidget {
@@ -15,13 +18,33 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
+  final FavoritesStore favoritesStore = Modular.get<FavoritesStore>();
   @override
   Widget build(BuildContext context) {
     final isSmallDevice = (ResponsiveWrapper.of(context).isMobile ||
         ResponsiveWrapper.of(context).isTablet);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Descrição'),
+        title: AutoSizeText(
+          widget.obj.title,
+          style: TextStyle(
+              decoration: TextDecoration.none,
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w400),
+          maxLines: 1,
+        ),
+        actions: [
+          IconButton(icon: Observer(
+            builder: (context) {
+              return Icon(favoritesStore.favorites.containsKey(widget.obj.id)
+                  ? Icons.star
+                  : Icons.star_border);
+            },
+          ), onPressed: () {
+            favoritesStore.toggleFavorite(widget.obj);
+          }),
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(25),
@@ -36,7 +59,7 @@ class _RecipePageState extends State<RecipePage> {
                     recipe: widget.obj,
                   ),
             AutoSizeText(
-              'Nutrients',
+              'Nutrientes',
               style: TextStyle(
                   decoration: TextDecoration.none,
                   fontSize: 20,
@@ -51,8 +74,9 @@ class _RecipePageState extends State<RecipePage> {
               elevation: 8,
               child: Container(
                 width: double.infinity,
+                padding: EdgeInsets.all(5),
                 child: Wrap(
-                  alignment: WrapAlignment.center,
+                  alignment: WrapAlignment.start,
                   spacing: 8,
                   runSpacing: 3,
                   children: widget.obj.nutrients
@@ -96,8 +120,9 @@ class _RecipePageState extends State<RecipePage> {
               elevation: 8,
               child: Container(
                 width: double.infinity,
+                padding: EdgeInsets.all(5),
                 child: Wrap(
-                  alignment: WrapAlignment.center,
+                  alignment: WrapAlignment.start,
                   spacing: 8,
                   runSpacing: 3,
                   children: widget.obj.ingredients
@@ -168,7 +193,7 @@ class _RecipePageState extends State<RecipePage> {
               maxLines: 1,
             ),
             SimilarRecipesGrid(
-                diet: widget.obj.diet, cuisine: widget.obj.cuisine)
+                diet: widget.obj.diets, cuisine: widget.obj.cuisines)
           ],
         ),
       ),

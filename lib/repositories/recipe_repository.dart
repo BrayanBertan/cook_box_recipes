@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class RecipeRepository {
   final String _baseURL = "https://api.spoonacular.com";
-  static const String API_KEY = "ef4568fdba7e4de5aa90bdb7ecb9e934";
+  static const String API_KEY = "660db93414d74551aaed8c67203a39c1";
 
   Future<List<Recipe>> getAllRecipes(
       FilterStore filter, String search, int offset) async {

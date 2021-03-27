@@ -7,8 +7,8 @@ class Recipe {
   String image;
   int servings;
   int readyInMinutes;
-  String diet;
-  String cuisine;
+  String diets;
+  String cuisines;
   List<Nutrition> ingredients;
   List analyzedInstructions;
   List<Nutrition> nutrients;
@@ -23,16 +23,24 @@ class Recipe {
       this.analyzedInstructions,
       this.nutrients,
       this.summary,
-      this.diet,
-      this.cuisine});
+      this.diets,
+      this.cuisines});
 
   factory Recipe.fromJson(Map<String, dynamic> obj) {
     return Recipe(
       id: obj['id'] ?? 0,
       summary: obj['summary'] ?? '',
       title: obj['title'],
-      diet: obj['diets'].length > 0 ? obj['diets'][0] : '',
-      cuisine: obj['cuisines'].length > 0 ? obj['cuisines'][0] : '',
+      diets: obj['diets'] is List
+          ? obj['diets'].length > 0
+              ? obj['diets'][0]
+              : ''
+          : obj['diets'],
+      cuisines: obj['cuisines'] is List
+          ? obj['cuisines'].length > 0
+              ? obj['cuisines'][0]
+              : ''
+          : obj['cuisines'],
       image: obj['image'] ??
           'https://archive.org/download/no-photo-available/no-photo-available.png',
       servings: obj['servings'] ?? 0,

@@ -13,7 +13,7 @@ class RecipeItem extends StatelessWidget {
         ResponsiveWrapper.of(context).isTablet);
     return GestureDetector(
       onTap: () {
-        Modular.to.navigate('/recipe', arguments: recipe);
+        Modular.to.pushNamed('/recipe', arguments: recipe);
       },
       child: Card(
         elevation: 8,
@@ -22,20 +22,17 @@ class RecipeItem extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                flex: 4,
-                child: Image.network(
-                  recipe.image,
-                  fit: BoxFit.cover,
-                ),
+              Image.network(
+                recipe.image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: isSmallDevice ? 125 : 150,
               ),
               AutoSizeText(
                 recipe.title,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
                 maxLines: 1,
               ),
               Expanded(
@@ -47,7 +44,7 @@ class RecipeItem extends StatelessWidget {
                         leading: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           radius: 12,
-                          backgroundImage: NetworkImage(
+                          backgroundImage: AssetImage(
                             'assets/images/timer.png',
                           ),
                         ),
@@ -70,7 +67,7 @@ class RecipeItem extends StatelessWidget {
                         leading: CircleAvatar(
                           radius: 12,
                           backgroundColor: Colors.transparent,
-                          backgroundImage: NetworkImage(
+                          backgroundImage: AssetImage(
                             'assets/images/serving.png',
                           ),
                         ),
