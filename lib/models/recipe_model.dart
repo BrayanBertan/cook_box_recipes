@@ -31,8 +31,8 @@ class Recipe {
       id: obj['id'] ?? 0,
       summary: obj['summary'] ?? '',
       title: obj['title'],
-      diet: obj['diet'] ?? '',
-      cuisine: obj['diet'] ?? '',
+      diet: obj['diets'].length > 0 ? obj['diets'][0] : '',
+      cuisine: obj['cuisines'].length > 0 ? obj['cuisines'][0] : '',
       image: obj['image'] ??
           'https://archive.org/download/no-photo-available/no-photo-available.png',
       servings: obj['servings'] ?? 0,

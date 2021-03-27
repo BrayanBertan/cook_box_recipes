@@ -17,7 +17,7 @@ class RecipeRepository {
     if (filter.maxFats > 0) endpoint += '&maxFat=${filter.maxFats}';
 
     endpoint += '&addRecipeNutrition=true&offset=$offset&number=1';
-    //  return [];
+
     try {
       final response = await Dio().get(endpoint);
       return response.data['results'].map<Recipe>((receita) {
@@ -30,6 +30,7 @@ class RecipeRepository {
 
   Future<List<Recipe>> getSimilarRecipes(String diet, String cuisine) async {
     String endpoint = '$_baseURL/recipes/random?apiKey=$API_KEY&number=3';
+    print('getSimilarRecipes $endpoint');
     print(endpoint);
     if (diet.trim().isNotEmpty) endpoint += '&diet=$diet';
     if (cuisine.trim().isNotEmpty) endpoint += '&cuisine=$cuisine';

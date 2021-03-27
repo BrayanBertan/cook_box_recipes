@@ -37,7 +37,8 @@ class RecipePage extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 30,
                           color: Colors.black,
-                          fontWeight: FontWeight.w500),
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.none),
                       maxLines: 1,
                     ),
                     SizedBox(
@@ -60,7 +61,10 @@ class RecipePage extends StatelessWidget {
           AutoSizeText(
             'Nutrients',
             style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+                decoration: TextDecoration.none,
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w400),
             maxLines: 1,
           ),
           SizedBox(
@@ -101,7 +105,10 @@ class RecipePage extends StatelessWidget {
           AutoSizeText(
             'Ingredientes',
             style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+                decoration: TextDecoration.none,
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w400),
             maxLines: 1,
           ),
           SizedBox(
@@ -143,7 +150,10 @@ class RecipePage extends StatelessWidget {
             'Modo de preparo',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+                decoration: TextDecoration.none,
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w400),
             maxLines: 1,
           ),
           SizedBox(
@@ -172,7 +182,10 @@ class RecipePage extends StatelessWidget {
             'Receitas similars',
             textAlign: TextAlign.left,
             style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w400),
+                decoration: TextDecoration.none,
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w400),
             maxLines: 1,
           ),
           SimilarRecipesGrid(diet: obj.diet, cuisine: obj.cuisine)
