@@ -26,7 +26,7 @@ class SimilarRecipeItem extends StatelessWidget {
                 recipe.image,
                 fit: BoxFit.cover,
                 width: double.infinity,
-                height: isSmallDevice ? 125 : 150,
+                height: isSmallDevice ? 115 : 150,
               ),
               AutoSizeText(
                 recipe.title,
