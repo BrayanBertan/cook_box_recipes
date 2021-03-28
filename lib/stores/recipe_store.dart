@@ -19,7 +19,7 @@ abstract class _RecipeStore with Store {
       try {
         final response =
             await recipeRepository.getAllRecipes(filter, search, offset);
-        if (recipeList.length < 10) lastPage = true;
+        if (response.length < 8) lastPage = true;
         recipeList.addAll(response);
       } catch (error) {
         print(error);

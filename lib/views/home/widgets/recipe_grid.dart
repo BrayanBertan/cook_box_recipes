@@ -21,7 +21,9 @@ class RecipeGrid extends StatelessWidget {
           : GridView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.all(isSmallDevice ? 10 : 25),
-              itemCount: recipeStore.recipeList.length + 1,
+              itemCount: recipeStore.lastPage
+                  ? recipeStore.recipeList.length
+                  : recipeStore.recipeList.length + 1,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 300,
                   crossAxisSpacing: 16,
@@ -32,14 +34,12 @@ class RecipeGrid extends StatelessWidget {
                   return RecipeItem(
                     recipe: recipeStore.recipeList[index],
                   );
-                else if (!recipeStore.lastPage) {
+                else {
                   recipeStore..setOffset();
                   return CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
                         Color.fromRGBO(203, 100, 100, 1)),
                   );
-                } else {
-                  return Container();
                 }
               },
             );

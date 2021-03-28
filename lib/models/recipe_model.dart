@@ -49,7 +49,8 @@ class Recipe {
           ? List<Nutrition>.from(obj['nutrition']['ingredients']
               .map((ingredient) => Nutrition.fromJson(ingredient)))
           : [],
-      analyzedInstructions: obj['analyzedInstructions'] != null
+      analyzedInstructions: obj['analyzedInstructions'] != null &&
+              obj['analyzedInstructions'].length > 0
           ? obj['analyzedInstructions'][0]['steps']
           : [],
       nutrients: obj['nutrition'] != null

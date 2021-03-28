@@ -20,12 +20,12 @@ class RecipeItem extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(bottom: 5),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.network(
                 recipe.image,
-                fit: BoxFit.cover,
-                width: double.infinity,
+                fit: BoxFit.fill,
                 height: isSmallDevice ? 125 : 150,
               ),
               AutoSizeText(
